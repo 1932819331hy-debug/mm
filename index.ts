@@ -33,7 +33,9 @@ export const mmStr = (n: number | string): string => {
 
 export const mil2mm = (mil: number | string) => {
   if (typeof mil === "number") return mm(`${mil}mil`)
-  if (mil.match(/^\d+$/)) return mm(`${mil}mil`)
+  if (/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(mil.trim())) {
+    return mm(`${mil.trim()}mil`)
+  }
   return mm(mil)
 }
 
