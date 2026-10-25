@@ -8,6 +8,7 @@ mm("10cm") // 100
 mm("10m") // 10000
 mm("1in") // 25.4
 mm("1ft") // 304.8
+mm(" 1cm ") // 10 (surrounding whitespace is ignored)
 ```
 
 ```bash

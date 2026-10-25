@@ -16,6 +16,7 @@ const mmNumberFormatter = new Intl.NumberFormat("en-US", {
 })
 
 export const mm = (n: number | string): number => {
+  if (typeof n === "string") n = n.trim()
   let unit =
     typeof n === "number" ? "mm" : n.replace(/^[^a-zA-Z]+/g, "").toLowerCase()
   if (!unit) unit = "mm"
