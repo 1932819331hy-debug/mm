@@ -24,3 +24,27 @@ test("mmStr avoids scientific notation", () => {
 test("mmStr formats converted units without scientific notation", () => {
   expect(mmStr("0.0000001in")).toBe("0.00000254mm")
 })
+
+test("rejects inherited names as unsupported units", () => {
+  expect(() => mm("1constructor")).toThrow("Unsupported unit: constructor")
+  expect(() => mm("1CONSTRUCTOR")).toThrow("Unsupported unit: constructor")
+  expect(() => mm("1parsec")).toThrow("Unsupported unit: parsec")
+})
+
+test("preserves every declared unit and the default millimeter unit", () => {
+  for (const [unit, factor] of [
+    ["in", 25.4],
+    ["inch", 25.4],
+    ["mil", 0.0254],
+    ["mm", 1],
+    ["m", 1000],
+    ["cm", 10],
+    ["ft", 304.8],
+    ["feet", 304.8],
+  ] as const) {
+    expect(mm(`2${unit}`)).toBeCloseTo(2 * factor)
+    expect(mm(`2${unit.toUpperCase()}`)).toBeCloseTo(2 * factor)
+  }
+  expect(mm(2)).toBe(2)
+  expect(mm("2")).toBe(2)
+})

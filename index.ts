@@ -21,7 +21,7 @@ export const mm = (n: number | string): number => {
   if (!unit) unit = "mm"
   const val = typeof n === "number" ? n : Number.parseFloat(n.split(unit)[0])
 
-  if (unit in unitToMm) {
+  if (Object.prototype.hasOwnProperty.call(unitToMm, unit)) {
     return val * unitToMm[unit]
   }
   throw new Error(`Unsupported unit: ${unit}`)
